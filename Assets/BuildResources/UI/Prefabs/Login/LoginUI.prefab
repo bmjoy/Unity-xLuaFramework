@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7d6e35c35142a4852bf71368c7e4c067, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 52071c6393e934abf91701195fd6a0a4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 2527024342420174579}
   - component: {fileID: 2527024342420174578}
   m_Layer: 5
-  m_Name: TestUI
+  m_Name: LoginUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

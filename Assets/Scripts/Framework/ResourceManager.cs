@@ -59,15 +59,42 @@ namespace Framework
             action?.Invoke(bundle_request?.asset); // TODO bundle_request.asset ?
         }
 
-        public void LoadAsset(string asset_name, Action<UObject> action)
+        private void LoadAsset(string asset_name, Action<UObject> action)
         {
             StartCoroutine(LoadBundleAsync(asset_name, action));
         }
+
+        public void LoadUI(string name, Action<UObject> action = null)
+        {
+            LoadAsset(PathUtil.GetUIPath(name), action);
+        }
+        
+        public void LoadMusic(string name, Action<UObject> action = null)
+        {
+            LoadAsset(PathUtil.GetMusicPath(name), action);
+        }
+        
+        public void LoadSound(string name, Action<UObject> action = null)
+        {
+            LoadAsset(PathUtil.GetSoundPath(name), action);
+        }
+        
+        public void LoadEffect(string name, Action<UObject> action = null)
+        {
+            LoadAsset(PathUtil.GetEffectPath(name), action);
+        }
+        
+        public void LoadScene(string name, Action<UObject> action = null)
+        {
+            LoadAsset(PathUtil.GetScenePath(name), action);
+        }
+        
+        // TODO 卸载
         
         private void Start()
         {
             ParseVersionFile();
-            LoadAsset("Assets/BuildResources/UI/Prefabs/TestUI.prefab", OnComplete);
+            LoadUI("Login/LoginUI", OnComplete);
         }
 
         private void OnComplete(UObject obj)
