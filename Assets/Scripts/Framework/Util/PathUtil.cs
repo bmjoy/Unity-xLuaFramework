@@ -1,3 +1,4 @@
+using Framework;
 using UnityEngine;
 
 public class PathUtil
@@ -11,8 +12,22 @@ public class PathUtil
     // Bundle 输出目录
     public static readonly string BundleOutPath = Application.streamingAssetsPath;
 
+    // 只读目录
+    public static readonly string ReadPath = Application.streamingAssetsPath;
+
+    // 可读写目录
+    public static readonly string ReadWritePath = Application.persistentDataPath;
+
     // Bundle 资源路径
-    public static string BundleResourcePath => Application.streamingAssetsPath; // 暂时设置为这个路径
+    public static string BundleResourcePath
+    {
+        get
+        {
+            if (AppConst.GameMode == GameMode.UpdateMode) return ReadWritePath;
+
+            return ReadPath;
+        }
+    }
 
     // 获取 Unity 的相对路径
     public static string GetUnityPath(string path)
@@ -63,5 +78,5 @@ public class PathUtil
     public static string GetScenePath(string name)
     {
         return $"Assets/BuildResources/Scenes/{name}.unity";
-    } 
+    }
 }

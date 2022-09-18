@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Framework;
 using UnityEngine;
 
@@ -11,5 +8,6 @@ public class GameStart : MonoBehaviour
     private void Awake()
     {
         AppConst.GameMode = GameMode;
+        DontDestroyOnLoad(this);
     }
 }

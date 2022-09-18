@@ -7,8 +7,15 @@ using UnityEngine;
 
 namespace Editor
 {
+    #if UNITY_EDITOR
     public class BuildTool : UnityEditor.Editor
     {
+        [MenuItem("Tools/Build Windows Bundle")]
+        private static void BuildWindowsBundle()
+        {
+            Build(BuildTarget.StandaloneWindows);
+        }
+
         [MenuItem("Tools/Build MacOS Bundle")]
         private static void BuildMacOSBundle()
         {
@@ -86,4 +93,5 @@ namespace Editor
             return dependence;
         }
     }
+    #endif
 }
