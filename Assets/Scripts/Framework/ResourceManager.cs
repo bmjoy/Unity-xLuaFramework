@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 using UObject = UnityEngine.Object;
 
@@ -55,42 +56,65 @@ namespace Framework
 
             var bundle_request = request.assetBundle.LoadAssetAsync(asset_name);
             yield return bundle_request;
-            
+
             action?.Invoke(bundle_request?.asset); // TODO bundle_request.asset ?
+        }
+
+        /// <summary>
+        /// 编辑器环境加载资源
+        /// </summary>
+        /// <param name="asset_name"></param>
+        /// <param name="action"></param>
+        private void EditorLoadAsset(string asset_name, Action<UObject> action = null)
+        {
+            Debug.Log("Loading Assets in editor mode.");
+            
+            UObject obj = AssetDatabase.LoadAssetAtPath(asset_name, typeof(UObject));
+            if (obj == null)
+            {
+                Debug.LogErrorFormat("assets name does not exist: {0}", asset_name);
+            }
+
+            action?.Invoke(obj);
         }
 
         private void LoadAsset(string asset_name, Action<UObject> action)
         {
-            StartCoroutine(LoadBundleAsync(asset_name, action));
+            if (AppConst.GameMode == GameMode.EditorMode)
+            {
+                EditorLoadAsset(asset_name, action);
+            }
+            else
+                StartCoroutine(LoadBundleAsync(asset_name, action));
         }
 
         public void LoadUI(string name, Action<UObject> action = null)
         {
             LoadAsset(PathUtil.GetUIPath(name), action);
         }
-        
+
         public void LoadMusic(string name, Action<UObject> action = null)
         {
             LoadAsset(PathUtil.GetMusicPath(name), action);
         }
-        
+
         public void LoadSound(string name, Action<UObject> action = null)
         {
             LoadAsset(PathUtil.GetSoundPath(name), action);
         }
-        
+
         public void LoadEffect(string name, Action<UObject> action = null)
         {
             LoadAsset(PathUtil.GetEffectPath(name), action);
         }
-        
+
         public void LoadScene(string name, Action<UObject> action = null)
         {
             LoadAsset(PathUtil.GetScenePath(name), action);
         }
-        
+
         // TODO 卸载
-        
+
         private void Start()
         {
             ParseVersionFile();
