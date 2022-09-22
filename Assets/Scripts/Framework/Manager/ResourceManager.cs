@@ -34,6 +34,9 @@ namespace Framework
                 bundle_info.Dependencies = new List<string>(info.Length - 2);
                 for (var j = 2; j < info.Length; j++) bundle_info.Dependencies.Add(info[j]);
                 _bundle_infos.Add(bundle_info.AssetsName, bundle_info);
+                
+                if (info[0].IndexOf("LuaScripts") > 0)
+                    Manager.Lua.LuaNames.Add(info[0]);
             }
         }
 
@@ -115,6 +118,11 @@ namespace Framework
         public void LoadScene(string name, Action<UObject> action = null)
         {
             LoadAsset(PathUtil.GetScenePath(name), action);
+        }
+        
+        public void LoadLua(string assetName, Action<UnityEngine.Object> action = null)
+        {
+            LoadAsset(assetName, action);
         }
 
         internal class BundleInfo
