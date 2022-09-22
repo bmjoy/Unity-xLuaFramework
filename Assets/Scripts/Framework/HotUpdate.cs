@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Framework.Managers;
 using Framework.Util;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -92,7 +93,7 @@ namespace Framework
         {
             // 下载只读目录的 filelist
             var url = Path.Combine(PathUtil.ReadPath, AppConst.FileListName);
-            
+
             // TODO 在 Mac 中测试
             url = url.Substring(url.IndexOf("Assets"));
 

@@ -1,0 +1,17 @@
+function OnInit() -- 相当于 Awake
+	----uistart
+	--uiend
+	print("lua oninit")
+end
+
+function OnOpen() -- 相当于 Start
+	print("lua OnOpen")
+end
+
+function Update()
+	print("lua Update")
+end
+
+function OnClose()
+	print("lua OnClose")
+end

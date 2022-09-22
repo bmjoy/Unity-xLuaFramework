@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UObject = UnityEngine.Object;
 
-namespace Framework
+namespace Framework.Managers
 {
     public class ResourceManager : MonoBehaviour
     {
@@ -34,7 +34,7 @@ namespace Framework
                 bundle_info.Dependencies = new List<string>(info.Length - 2);
                 for (var j = 2; j < info.Length; j++) bundle_info.Dependencies.Add(info[j]);
                 _bundle_infos.Add(bundle_info.AssetsName, bundle_info);
-                
+
                 if (info[0].IndexOf("LuaScripts") > 0)
                     Manager.Lua.LuaNames.Add(info[0]);
             }
@@ -92,7 +92,9 @@ namespace Framework
             }
 
             else
+            {
                 StartCoroutine(LoadBundleAsync(asset_name, action));
+            }
         }
 
         public void LoadUI(string name, Action<UObject> action = null)
@@ -119,8 +121,8 @@ namespace Framework
         {
             LoadAsset(PathUtil.GetScenePath(name), action);
         }
-        
-        public void LoadLua(string assetName, Action<UnityEngine.Object> action = null)
+
+        public void LoadLua(string assetName, Action<UObject> action = null)
         {
             LoadAsset(assetName, action);
         }

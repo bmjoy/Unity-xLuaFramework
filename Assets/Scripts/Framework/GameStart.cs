@@ -1,5 +1,7 @@
 using Framework;
+using Framework.Managers;
 using UnityEngine;
+using XLua;
 
 public class GameStart : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class GameStart : MonoBehaviour
         Manager.Lua.Init(() =>
         {
             Manager.Lua.StartLua("main");
-            XLua.LuaFunction function = Manager.Lua.LuaEnv.Global.Get<XLua.LuaFunction>("Main");
+            var function = Manager.Lua.LuaEnv.Global.Get<LuaFunction>("Main");
             function.Call();
         });
     }

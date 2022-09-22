@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Editor
 {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     public class BuildTool : UnityEditor.Editor
     {
         [MenuItem("Tools/Build Windows Bundle")]
@@ -93,5 +93,5 @@ namespace Editor
             return dependence;
         }
     }
-    #endif
+#endif
 }
